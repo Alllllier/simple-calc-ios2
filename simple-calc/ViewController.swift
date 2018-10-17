@@ -123,7 +123,7 @@ class ViewController: UIViewController {
         result = Double(nums.count)
       case 8:
         if nums.count == 1 {
-          result = Double(factorial(Int(round(nums[0]))))
+          result = Double(factorial(Int(floor(nums[0]))))
         } else {
           setResult("Error！")
         }

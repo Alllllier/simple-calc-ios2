@@ -22,7 +22,7 @@ class ViewController: UIViewController {
   var currentNum = ""
   var resulted = false
   var rpn = false
-  
+  var history: [String] = []
   
   @IBAction func rpnSwitch(_ sender: UISwitch) {
     rpn = sender.isOn
@@ -149,6 +149,9 @@ class ViewController: UIViewController {
   }
   
   func setResult(_ result: String) {
+    var currentResult = (displayField.text ?? "") + " = "
+    currentResult += result
+    history.append(currentResult)
     nums = []
     oper = 0
     currentNum = ""
@@ -158,5 +161,12 @@ class ViewController: UIViewController {
   
   @IBAction func clear(_ sender: Any) {
     setResult("")
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "mainToHistory" {
+      let historyVC = segue.destination as! HistoryViewController
+      historyVC.history = history
+    }
   }
 }
